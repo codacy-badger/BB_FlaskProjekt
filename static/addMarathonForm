@@ -1,0 +1,24 @@
+from flask_wtf import FlaskForm
+from wtforms.fields.datetime import DateField
+from wtforms.fields.simple import StringField
+from wtforms import validators
+
+class AddLauferForm(FlaskForm):
+    Herkunft = StringField("Herkunft",validators=[validators.InputRequired()])
+    Email = StringField("Email",validators=[validators.InputRequired()])
+    Nachname = StringField("Nachname",validators=[validators.InputRequired()])
+    Vorname = StringField("Vorname",validators=[validators.InputRequired()])
+    Geburtsdatum = DateField("Geburtsdatum")
+
+class AddMarathonlaufForm(FlaskForm):
+    Preisgeld = int("Preisgeld")
+    Kilometer = int("Kilometer")
+    Datum = DateField("Datum")
+    Preis_für_Teilnahme = int("Preis_für_Teilnahme")
+    Besucher = StringField("Besucher",validators=[validators.InputRequired()])
+
+class Organisator(FlaskForm):
+    Anschrift = StringField("Anschrift",validators=[validators.InputRequired()])
+    Name =  StringField("Name",validators=[validators.InputRequired()])
+    Sponsoren =  StringField("Sponsoren",validators=[validators.InputRequired()])
+    Telefonnummer = int("Telefonnummer")
