@@ -4,9 +4,9 @@ from flask import Blueprint
 import sqlalchemy
 from models import db, Marathon
 
-marathonlauf_blueprint = Blueprint('laufer_blueprint', __name__)
+marathonlauf_blueprint = Blueprint('marathonlauf_blueprint', __name__)
 
-@marathonlauf_blueprint.route("/laufer")
+@marathonlauf_blueprint.route("/marathonlauf")
 def index():
     session : sqlalchemy.orm.scoping.scoped_session = db.session
     marathonlauf = session.query(Marathon).all()

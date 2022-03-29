@@ -3,6 +3,8 @@ from models import db
 from flask.templating import render_template
 from controllers.index import index_blueprint
 from controllers.laufer import laufer_blueprint
+from controllers.marathonlauf import marathonlauf_blueprint
+from controllers.organisator import organisator_blueprint
 
 import sqlalchemy
 app = Flask(__name__)
@@ -16,5 +18,7 @@ db.init_app(app)
 #hier blueprint registrieren
 app.register_blueprint(index_blueprint)
 app.register_blueprint(laufer_blueprint)
+app.register_blueprint(marathonlauf_blueprint)
+app.register_blueprint(organisator_blueprint)
 
 app.run(debug=True)
