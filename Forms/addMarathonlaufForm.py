@@ -3,7 +3,7 @@ from wtforms.fields.datetime import DateField
 from wtforms.fields.simple import BooleanField, StringField, TextAreaField
 from wtforms import validators
 
-class AddLauferForm(FlaskForm):
+class AddMarathonlaufForm(FlaskForm):
     Preisgeld = int("Preisgeld", validators=[validators.InputRequired()])
     Kilometer = int("Kilometer", validators=[validators.InputRequired()])
     Datum = DateField("dueDate", validators=[validators.InputRequired()])
