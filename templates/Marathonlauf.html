@@ -1,0 +1,62 @@
+{%extends 'base.html'%}
+
+{%block body%}   
+    <form method="post">
+
+        {{form.csrf_token}}
+
+        <div class="row mb-3">
+            <label for="Herkunft" class="col-sm-2 col-form-label">Title</label>
+            <div class="col-sm-10">
+                {{form.Preisgeld()}}
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="Email" class="col-sm-2 col-form-label">Title</label>
+            <div class="col-sm-10">
+                {{form.Kilometer()}}
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="Nachname" class="col-sm-2 col-form-label">Title</label>
+            <div class="col-sm-10">
+                {{form.Datum()}}
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="Vorname" class="col-sm-2 col-form-label">Title</label>
+            <div class="col-sm-10">
+                {{form.Preis_für_Teilnahme()}}
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="Geburtsdatum" class="col-sm-2 col-form-label">Title</label>
+            <div class="col-sm-10">
+                {{form.Besucher()}}
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add</button>
+
+    </form>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <td scope="col">Marathon ID</td>
+                <td scope="col">Preisgeld</td>
+                <td scope="col">Kilometer</td>
+                <td scope="col">Datum</td>
+                <td scope="col">Preis_für_Teilnahme</td>
+                <td scope="col">Besucher</td>
+                <td scope="col">Action</td>
+            </tr>
+        </thead>
+
+    </table>
+
+{%endblock%}
