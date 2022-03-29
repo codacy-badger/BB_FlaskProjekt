@@ -1,0 +1,54 @@
+{%extends 'base.html'%}
+
+{%block body%}   
+    <form method="post">
+
+        {{form.csrf_token}}
+
+        <div class="row mb-3">
+            <label for="Herkunft" class="col-sm-2 col-form-label">Title</label>
+            <div class="col-sm-10">
+                {{form.Anschrift()}}
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="Email" class="col-sm-2 col-form-label">Title</label>
+            <div class="col-sm-10">
+                {{form.Name()}}
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="Nachname" class="col-sm-2 col-form-label">Title</label>
+            <div class="col-sm-10">
+                {{form.Sponsoren()}}
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="Vorname" class="col-sm-2 col-form-label">Title</label>
+            <div class="col-sm-10">
+                {{form.Telefonnummer()}}
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add</button>
+
+    </form>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <td scope="col">Organisation ID</td>
+                <td scope="col">Anschrift</td>
+                <td scope="col">Name</td>
+                <td scope="col">Sponsoren</td>
+                <td scope="col">Telefonnummer</td>
+                <td scope="col">Action</td>
+            </tr>
+        </thead>
+
+    </table>
+
+{%endblock%}
