@@ -1,9 +1,10 @@
-from flask import Flask, request, redirect
+from flask import Flask, request, redirect, flash
 from flask.templating import render_template
 from flask import Blueprint
 import sqlalchemy
 from models import db, Laufer
 from Forms.addLauferForm import AddLauferForm
+from Forms.deleteLauferForm import DeleteLauferForm
 
 laufer_blueprint = Blueprint('laufer_blueprint', __name__)
 
@@ -36,20 +37,20 @@ def index():
 
 laufer_blueprint.route("/items/delete", methods=["post"])
 def deleteLaufer():
-    deleteItemFormObj = del()
-    if deleteItemFormObj.validate_on_submit():
+    deleteLauferFormObj = DeleteLauferForm()
+    if deleteLauferFormObj.validate_on_submit():
         print("gültig")
         #db objekt holen
         #delete command ausführen
 
-        itemIdToDelete = deleteItemFormObj.itemId.data
-        itemToDelete = db.session.query(Todoitem).filter(Todoitem.itemId == itemIdToDelete)
-        itemToDelete.delete()
+        LauferIdToDelete = deleteLauferFormObj.itemId.data
+        LauferToDelete = db.session.query(Laufer).filter(Laufer.LauferID == LauferIdToDelete)
+        LauferToDelete.delete()
         
         db.session.commit()
     else:
         print("Fatal Error")
     
-    flash(f"Item with id {itemIdToDelete} has been deleted")    
+    flash(f"Item with id {LauferIdToDelete} has been deleted")    
 
-    return redirect("/")
+    return redirect("/laufer")
