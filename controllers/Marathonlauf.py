@@ -29,7 +29,7 @@ def index():
         db.session.add(newMarathonlauf)
         db.session.commit()
 
-        return redirect("/laufer")
+        return redirect("/marathonlauf")
 
-    laufer = db.session.query(Marathonlauf).all()
-    return render_template("laufer.html", form = AddMarathonlaufForm, items = laufer)
+    marathonlauf = db.session.query(Marathonlauf).all()
+    return render_template("marathonlauf.html", form = AddMarathonlaufForm, items = marathonlauf)

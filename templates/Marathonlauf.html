@@ -6,35 +6,35 @@
         {{form.csrf_token}}
 
         <div class="row mb-3">
-            <label for="Herkunft" class="col-sm-2 col-form-label">Title</label>
+            <label for="Preisgeld" class="col-sm-2 col-form-label">Preisgeld</label>
             <div class="col-sm-10">
                 {{form.Preisgeld()}}
             </div>
         </div>
 
         <div class="row mb-3">
-            <label for="Email" class="col-sm-2 col-form-label">Title</label>
+            <label for="Kilometer" class="col-sm-2 col-form-label">Kilometer</label>
             <div class="col-sm-10">
                 {{form.Kilometer()}}
             </div>
         </div>
 
         <div class="row mb-3">
-            <label for="Nachname" class="col-sm-2 col-form-label">Title</label>
+            <label for="Datum" class="col-sm-2 col-form-label">Datum</label>
             <div class="col-sm-10">
                 {{form.Datum()}}
             </div>
         </div>
 
         <div class="row mb-3">
-            <label for="Vorname" class="col-sm-2 col-form-label">Title</label>
+            <label for="Preis_für_Teilnahme" class="col-sm-2 col-form-label">Preis_für_Teilnahme</label>
             <div class="col-sm-10">
                 {{form.Preis_für_Teilnahme()}}
             </div>
         </div>
 
         <div class="row mb-3">
-            <label for="Geburtsdatum" class="col-sm-2 col-form-label">Title</label>
+            <label for="Besucher" class="col-sm-2 col-form-label">Besucher</label>
             <div class="col-sm-10">
                 {{form.Besucher()}}
             </div>
@@ -56,6 +56,18 @@
                 <td scope="col">Action</td>
             </tr>
         </thead>
+        <tbody>
+            {%for item in items:%}
+                <tr>
+                    <td scope="row">{{item.MarathonId}}</td>
+                    <td>{{item.Preisgeld}}</td>
+                    <td>{{item.Kilometer}}</td>
+                    <td>{{item.Datum}}</td>
+                    <td>{{item.Preis_für_Teilnahme}}</td>
+                    <td>{{item.Besucher}}</td>
+                </tr>
+            {%endfor%}
+        </tbody>
 
     </table>
 
