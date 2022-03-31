@@ -31,5 +31,5 @@ def index():
 
         return redirect("/marathonlauf")
 
-    marathonlauf = db.session.query(Marathonlauf).all()
+    marathonlauf = db.session.query(newMarathonlauf).all()
     return render_template("marathonlauf.html", form = AddMarathonlaufForm, items = marathonlauf)
