@@ -13,23 +13,23 @@ def index():
     addOrganisatorFormObject = AddOrganisatorForm()
 
     if addOrganisatorFormObject.validate_on_submit():
-        print(addOrganisatorFormObject.Preisgeld.data)
-        print(addOrganisatorFormObject.Kilometer.data)
-        print(addOrganisatorFormObject.Datum.data)
-        print(addOrganisatorFormObject.Preis_für_Teilnahme.data)
+        print(addOrganisatorFormObject.Anschrift.data)
+        print(addOrganisatorFormObject.Name.data)
+        print(addOrganisatorFormObject.Sponsoren.data)
+        print(addOrganisatorFormObject.Telefonnummer.data)
         print(addOrganisatorFormObject.Besucher.data)
 
-        newMarathonlauf = Organisator()
-        newMarathonlauf.Preisgeld = addOrganisatorFormObject.Preisgeld.data
-        newMarathonlauf.Kilometer = addOrganisatorFormObject.Kilometer.data
-        newMarathonlauf.Datum = addOrganisatorFormObject.Datum.data
-        newMarathonlauf.Preis_für_Teilnahme = addOrganisatorFormObject.Preis_für_Teilnahme.data
-        newMarathonlauf.Besucher = addOrganisatorFormObject.Besucher.data
+        newOrganisator = Organisator()
+        newOrganisator.Anschrift = addOrganisatorFormObject.Anschrift.data
+        newOrganisator.Name = addOrganisatorFormObject.Name.data
+        newOrganisator.Sponsoren = addOrganisatorFormObject.Sponsoren.data
+        newOrganisator.Telefonnummer = addOrganisatorFormObject.Telefonnummer.data
+        newOrganisator.Besucher = addOrganisatorFormObject.Besucher.data
 
-        db.session.add(newMarathonlauf)
+        db.session.add(newOrganisator)
         db.session.commit()
 
-        return redirect("/marathonlauf")
+        return redirect("/organisator")
 
-    marathonlauf = db.session.query(Marathonlauf).all()
-    return render_template("marathonlauf.html", form = AddMarathonlaufForm, items = marathonlauf)
+    marathonlauf = db.session.query(Organisator).all()
+    return render_template("organisator.html", form = addOrganisatorFormObject, items = marathonlauf)
