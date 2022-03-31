@@ -66,6 +66,13 @@
                     <td>{{item.Nachname}}</td>
                     <td>{{item.Vorname}}</td>
                     <td>{{item.Geburtsdatum}}</td>
+                    <td>
+                    <form method="post" action="/laufer/delete">
+                        {{form.csrf_token}}
+                        <input type="hidden" id="LauferId" name="LauferId" value="{{item.LauferId}}">
+                        <button class="btn btn-danger" onclick="deleteLaufer(this); return false;">❌</button>
+                    </form>
+                    </td>
                 </tr>
             {%endfor%}
         </tbody>

@@ -4,6 +4,7 @@ from flask import Blueprint
 import sqlalchemy
 from models import db, Laufer
 from Forms.addLauferForm import AddLauferForm
+
 laufer_blueprint = Blueprint('laufer_blueprint', __name__)
 
 @laufer_blueprint.route("/laufer", methods=["get","post"])
@@ -32,3 +33,23 @@ def index():
 
     laufer = db.session.query(Laufer).all()
     return render_template("laufer.html", form = addLauferFormObject, items = laufer)
+
+laufer_blueprint.route("/items/delete", methods=["post"])
+def deleteLaufer():
+    deleteItemFormObj = del()
+    if deleteItemFormObj.validate_on_submit():
+        print("gültig")
+        #db objekt holen
+        #delete command ausführen
+
+        itemIdToDelete = deleteItemFormObj.itemId.data
+        itemToDelete = db.session.query(Todoitem).filter(Todoitem.itemId == itemIdToDelete)
+        itemToDelete.delete()
+        
+        db.session.commit()
+    else:
+        print("Fatal Error")
+    
+    flash(f"Item with id {itemIdToDelete} has been deleted")    
+
+    return redirect("/")
