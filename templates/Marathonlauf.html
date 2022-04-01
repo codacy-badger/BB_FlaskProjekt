@@ -65,6 +65,13 @@
                     <td>{{item.Datum}}</td>
                     <td>{{item.Preis_für_Teilnahme}}</td>
                     <td>{{item.Besucher}}</td>
+                    <td>
+                    <form method="post" action="/marathonlauf/delete">
+                        {{form.csrf_token}}
+                        <input type="hidden" id="MarathonId" name="MarathonId" value="{{item.MarathonId}}">
+                        <button class="btn btn-danger" onclick="deleteLaufer(this); return false;">❌</button>
+                    </form>
+                    </td>
                 </tr>
             {%endfor%}
         </tbody>

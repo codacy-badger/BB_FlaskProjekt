@@ -48,6 +48,24 @@
                 <td scope="col">Action</td>
             </tr>
         </thead>
+        <tbody>
+            {%for item in items:%}
+                <tr>
+                    <td scope="row">{{item.OrganisatioId}}</td>
+                    <td>{{item.Anschrift}}</td>
+                    <td>{{item.Name}}</td>
+                    <td>{{item.Sponsoren}}</td>
+                    <td>{{item.Telefonnummer}}</td>
+                    <td>
+                    <form method="post" action="/organisator/delete">
+                        {{form.csrf_token}}
+                        <input type="hidden" id="OrganisatioId" name="OrganisatioId" value="{{item.OrganisatioId}}">
+                        <button class="btn btn-danger" onclick="deleteOrganisator(this); return false;">❌</button>
+                    </form>
+                    </td>
+                </tr>
+            {%endfor%}
+        </tbody>
 
     </table>
 
