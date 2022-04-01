@@ -8,13 +8,6 @@ from Forms.deleteLauferForm import DeleteLauferForm
 
 laufer_blueprint = Blueprint('laufer_blueprint', __name__)
 
-app = Flask(__name__)
-app.secret_key = "VerySecretSecretKey"
-
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://root:rootroot@localhost/marathon"
-db.init_app(app)
-
 @laufer_blueprint.route("/laufer", methods=["get","post"])
 def index():
 
