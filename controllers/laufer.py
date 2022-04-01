@@ -8,6 +8,13 @@ from Forms.deleteLauferForm import DeleteLauferForm
 
 laufer_blueprint = Blueprint('laufer_blueprint', __name__)
 
+app = Flask(__name__)
+app.secret_key = "VerySecretSecretKey"
+
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://root:rootroot@localhost/todoItemApp"
+db.init_app(app)
+
 @laufer_blueprint.route("/laufer", methods=["get","post"])
 def index():
 
@@ -35,13 +42,11 @@ def index():
     laufer = db.session.query(Laufer).all()
     return render_template("laufer.html", form = addLauferFormObject, items = laufer)
 
-laufer_blueprint.route("/items/delete", methods=["post"])
+laufer_blueprint.route("/laufer/delete", methods=["post"])
 def deleteLaufer():
     deleteLauferFormObj = DeleteLauferForm()
     if deleteLauferFormObj.validate_on_submit():
         print("gültig")
-        #db objekt holen
-        #delete command ausführen
 
         LauferIdToDelete = deleteLauferFormObj.itemId.data
         LauferToDelete = db.session.query(Laufer).filter(Laufer.LauferID == LauferIdToDelete)
@@ -51,6 +56,6 @@ def deleteLaufer():
     else:
         print("Fatal Error")
     
-    flash(f"Item with id {LauferIdToDelete} has been deleted")    
+    flash(f"Laufer with id {LauferIdToDelete} has been deleted")    
 
     return redirect("/laufer")
