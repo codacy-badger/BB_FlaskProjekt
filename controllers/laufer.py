@@ -35,13 +35,14 @@ def index():
     laufer = db.session.query(Laufer).all()
     return render_template("laufer.html", form = addLauferFormObject, items = laufer)
 
-laufer_blueprint.route("/laufer/delete", methods=["post"])
+@laufer_blueprint.route("/laufer/delete", methods=["post"])
+
 def deleteLaufer():
     deleteLauferFormObj = DeleteLauferForm()
     if deleteLauferFormObj.validate_on_submit():
         print("gültig")
 
-        LauferIdToDelete = deleteLauferFormObj.itemId.data
+        LauferIdToDelete = deleteLauferFormObj.LauferID.data
         LauferToDelete = db.session.query(Laufer).filter(Laufer.LauferID == LauferIdToDelete)
         LauferToDelete.delete()
         

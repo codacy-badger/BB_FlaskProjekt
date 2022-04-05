@@ -35,13 +35,13 @@ def index():
     marathonlauf = db.session.query(Marathonlauf).all()
     return render_template("marathonlauf.html", form = addMarathonlaufFormObject, items = marathonlauf)
 
-marathonlauf_blueprint.route("/marathonlauf/delete", methods=["post"])
+@marathonlauf_blueprint.route("/marathonlauf/delete", methods=["post"])
 def deleteMarathonlauf():
     deleteMarathonlaufFormObj = DeleteMarathonlaufForm()
     if deleteMarathonlaufFormObj.validate_on_submit():
         print("gültig")
 
-        MarathonIdToDelete = deleteMarathonlaufFormObj.itemId.data
+        MarathonIdToDelete = deleteMarathonlaufFormObj.MarathonID.data
         MarathonlaufToDelete = db.session.query(Marathonlauf).filter(Marathonlauf.MarathonID == MarathonIdToDelete)
         MarathonlaufToDelete.delete()
         

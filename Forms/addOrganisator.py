@@ -9,4 +9,3 @@ class AddOrganisatorForm(FlaskForm):
     Name = StringField("Name", validators=[validators.InputRequired()])
     Sponsoren = StringField("Sponsoren", validators=[validators.InputRequired()])
     Telefonnummer = DecimalField("Telefonnummer", validators=[validators.InputRequired()])
-    Besucher = StringField("Besucher", validators=[validators.InputRequired()])
