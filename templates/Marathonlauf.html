@@ -59,7 +59,7 @@
         <tbody>
             {%for item in items:%}
                 <tr>
-                    <td scope="row">{{item.MarathonId}}</td>
+                    <td scope="row">{{item.MarathonID}}</td>
                     <td>{{item.Preisgeld}}</td>
                     <td>{{item.Kilometer}}</td>
                     <td>{{item.Datum}}</td>
@@ -68,7 +68,7 @@
                     <td>
                     <form method="post" action="/marathonlauf/delete">
                         {{form.csrf_token}}
-                        <input type="hidden" id="MarathonId" name="MarathonId" value="{{item.MarathonId}}">
+                        <input type="hidden" id="MarathonID" name="MarathonID" value="{{item.MarathonID}}">
                         <button class="btn btn-danger" onclick="deleteLaufer(this); return false;">❌</button>
                     </form>
                     </td>
