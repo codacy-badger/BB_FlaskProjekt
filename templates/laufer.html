@@ -72,6 +72,8 @@
                         <input type="hidden" id="LauferID" name="LauferID" value="{{item.LauferID}}">
                         <button class="btn btn-danger" onclick="deleteMarathonlauf(this); return false;">❌</button>
                     </form>
+                        <button class="btn btn-info mt-1" 
+                            onclick="window.location.href='/laufer/editLauferForm?LauferID={{item.LauferID}}'">✏️</button>
                     </td>
                 </tr>
             {%endfor%}

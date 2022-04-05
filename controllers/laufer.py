@@ -5,6 +5,7 @@ import sqlalchemy
 from models import db, Laufer
 from Forms.addLauferForm import AddLauferForm
 from Forms.deleteLauferForm import DeleteLauferForm
+from Forms.editLauferForm import EditLauferForm
 
 laufer_blueprint = Blueprint('laufer_blueprint', __name__)
 
@@ -53,3 +54,42 @@ def deleteLaufer():
     flash(f"Laufer with id {LauferIdToDelete} has been deleted")    
 
     return redirect("/laufer")
+
+@laufer_blueprint.route("/laufer/editLauferForm", methods=["post"])
+def submitEditForm():
+    editLauferFormObject = EditLauferForm()
+
+    if editLauferFormObject.validate_on_submit():
+        print("Submit wurde durchgeführt")
+
+        LauferID = editLauferFormObject.LauferID.data
+
+        Laufer_to_edit = db.session.query(Laufer).filter(Laufer.LauferID == LauferID).first()
+        Laufer_to_edit.Herkunft = editLauferFormObject.Herkunft.data
+        Laufer_to_edit.Email = editLauferFormObject.Email.data
+        Laufer_to_edit.Nachname = editLauferFormObject.Nachname.data
+        Laufer_to_edit.Vorname = editLauferFormObject.Vorname.data
+        Laufer_to_edit.Geburtsdatum = editLauferFormObject.Geburtsdatum.data
+
+        db.session.commit()
+
+        return redirect("/laufer")
+    else:
+        raise ("Fatal Error")
+
+@laufer_blueprint.route("/laufer/editLauferForm")
+def showEditForm():
+    LauferID = request.args["LauferID"]
+
+    Laufer_to_edit = db.session.query(Laufer).filter(Laufer.LauferID == LauferID).first()
+    
+    editLauferFormObject = EditLauferForm()
+
+    editLauferFormObject.LauferID.data = Laufer_to_edit.LauferID
+    editLauferFormObject.Herkunft.data = Laufer_to_edit.Herkunft
+    editLauferFormObject.Email.data = Laufer_to_edit.Email
+    editLauferFormObject.Nachname.data = Laufer_to_edit.Nachname
+    editLauferFormObject.Vorname.data = Laufer_to_edit.Vorname
+    editLauferFormObject.Geburtsdatum.data = Laufer_to_edit.Geburtsdatum
+    
+    return render_template("editLauferForm.html", form = editLauferFormObject)
