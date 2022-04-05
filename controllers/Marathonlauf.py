@@ -5,6 +5,7 @@ import sqlalchemy
 from models import db, Marathonlauf
 from Forms.addMarathonlaufForm import AddMarathonlaufForm
 from Forms.deleteMarathonlaufForm import DeleteMarathonlaufForm
+from Forms.editMarathonlaufForm import EditMarathonlaufrForm
 
 marathonlauf_blueprint = Blueprint('marathonlauf_blueprint', __name__)
 
@@ -52,3 +53,42 @@ def deleteMarathonlauf():
     flash(f"Marathonlauf with id {MarathonIdToDelete} has been deleted")    
 
     return redirect("/marathonlauf")
+
+@marathonlauf_blueprint.route("/marathonlauf/editMarathonlaufForm", methods=["post"])
+def submitEditForm():
+    editMarathonlaufFormObject = EditMarathonlaufrForm()
+
+    if editMarathonlaufFormObject.validate_on_submit():
+        print("Submit wurde durchgeführt")
+
+        MarathonID = editMarathonlaufFormObject.MarathonID.data
+
+        Marathonlauf_to_edit = db.session.query(Marathonlauf).filter(Marathonlauf.MarathonID == MarathonID).first()
+        Marathonlauf_to_edit.Preisgeld = editMarathonlaufFormObject.Preisgeld.data
+        Marathonlauf_to_edit.Kilometer = editMarathonlaufFormObject.Kilometer.data
+        Marathonlauf_to_edit.Datum = editMarathonlaufFormObject.Datum.data
+        Marathonlauf_to_edit.Preis_für_Teilnahme = editMarathonlaufFormObject.Preis_für_Teilnahme.data
+        Marathonlauf_to_edit.Besucher = editMarathonlaufFormObject.Besucher.data
+
+        db.session.commit()
+
+        return redirect("/marathonlauf")
+    else:
+        raise ("Fatal Error")
+
+@marathonlauf_blueprint.route("/marathonlauf/editMarathonlaufForm")
+def showEditForm():
+    MarathonID = request.args["MarathonID"]
+
+    Marathonlauf_to_edit = db.session.query(Marathonlauf).filter(Marathonlauf.MarathonID == MarathonID).first()
+    
+    editMarathonlaufFormObject = EditMarathonlaufrForm()
+
+    editMarathonlaufFormObject.MarathonID.data = Marathonlauf_to_edit.MarathonID
+    editMarathonlaufFormObject.Preisgeld.data = Marathonlauf_to_edit.Preisgeld
+    editMarathonlaufFormObject.Kilometer.data = Marathonlauf_to_edit.Kilometer
+    editMarathonlaufFormObject.Datum.data = Marathonlauf_to_edit.Datum
+    editMarathonlaufFormObject.Preis_für_Teilnahme.data = Marathonlauf_to_edit.Preis_für_Teilnahme
+    editMarathonlaufFormObject.Besucher.data = Marathonlauf_to_edit.Besucher
+    
+    return render_template("editMarathonlaufForm.html", form = editMarathonlaufFormObject)
