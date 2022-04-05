@@ -5,7 +5,7 @@ import sqlalchemy
 from models import db, Marathonlauf
 from Forms.addMarathonlaufForm import AddMarathonlaufForm
 from Forms.deleteMarathonlaufForm import DeleteMarathonlaufForm
-from Forms.editMarathonlaufForm import EditMarathonlaufrForm
+from Forms.editMarathonlaufForm import EditMarathonlaufForm
 
 marathonlauf_blueprint = Blueprint('marathonlauf_blueprint', __name__)
 
@@ -56,7 +56,7 @@ def deleteMarathonlauf():
 
 @marathonlauf_blueprint.route("/marathonlauf/editMarathonlaufForm", methods=["post"])
 def submitEditForm():
-    editMarathonlaufFormObject = EditMarathonlaufrForm()
+    editMarathonlaufFormObject = EditMarathonlaufForm()
 
     if editMarathonlaufFormObject.validate_on_submit():
         print("Submit wurde durchgeführt")
@@ -82,7 +82,7 @@ def showEditForm():
 
     Marathonlauf_to_edit = db.session.query(Marathonlauf).filter(Marathonlauf.MarathonID == MarathonID).first()
     
-    editMarathonlaufFormObject = EditMarathonlaufrForm()
+    editMarathonlaufFormObject = EditMarathonlaufForm()
 
     editMarathonlaufFormObject.MarathonID.data = Marathonlauf_to_edit.MarathonID
     editMarathonlaufFormObject.Preisgeld.data = Marathonlauf_to_edit.Preisgeld

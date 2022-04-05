@@ -5,6 +5,7 @@ import sqlalchemy
 from models import db, Organisator
 from Forms.addOrganisator import AddOrganisatorForm
 from Forms.deleteOrganisatorForm import DeleteOrganisatorForm
+from Forms.editOrganisatorForm import EditOrganisatorForm
 
 organisator_blueprint = Blueprint('organisator_blueprint', __name__)
 
@@ -50,3 +51,41 @@ def deleteOrganisator():
     flash(f"Organisator with id {OrganisatorIdToDelete} has been deleted")    
 
     return redirect("/organisator")
+
+@organisator_blueprint.route("/organisator/editOrganisatorForm", methods=["post"])
+def submitEditForm():
+    editOrganisatorFormObject = EditOrganisatorForm()
+
+    if editOrganisatorFormObject.validate_on_submit():
+        print("Submit wurde durchgeführt")
+
+        OrganisationID = editOrganisatorFormObject.OrganisationID.data
+
+        Organisator_to_edit = db.session.query(Organisator).filter(Organisator.OrganisationID == OrganisationID).first()
+        Organisator_to_edit.Anschrift = editOrganisatorFormObject.Anschrift.data
+        Organisator_to_edit.Name = editOrganisatorFormObject.Name.data
+        Organisator_to_edit.Sponsoren = editOrganisatorFormObject.Sponsoren.data
+        Organisator_to_edit.Telefonnummer = editOrganisatorFormObject.Telefonnummer.data
+
+        db.session.commit()
+
+        return redirect("/organisator")
+    else:
+        raise ("Fatal Error")
+
+@organisator_blueprint.route("/organisator/editMarathonlaufForm")
+def showEditForm():
+    OrganisationID = request.args["MarathonID"]
+
+    Organisator_to_edit = db.session.query(Organisator).filter(Organisator.OrganisationID == OrganisationID).first()
+    
+    editOrganisatorFormObject = EditOrganisatorForm()
+
+    editOrganisatorFormObject.MarathonID.data = Organisator_to_edit.MarathonID
+    editOrganisatorFormObject.Preisgeld.data = Organisator_to_edit.Preisgeld
+    editOrganisatorFormObject.Kilometer.data = Organisator_to_edit.Kilometer
+    editOrganisatorFormObject.Datum.data = Organisator_to_edit.Datum
+    editOrganisatorFormObject.Preis_für_Teilnahme.data = Organisator_to_edit.Preis_für_Teilnahme
+    editOrganisatorFormObject.Besucher.data = Organisator_to_edit.Besucher
+    
+    return render_template("editMarathonlaufForm.html", form = editOrganisatorFormObject)
