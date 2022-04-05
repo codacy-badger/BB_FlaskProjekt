@@ -9,4 +9,4 @@ class AddMarathonlaufForm(FlaskForm):
     Kilometer = DecimalField("Kilometer", validators=[validators.InputRequired()])
     Datum = DateField("dueDate", validators=[validators.InputRequired()])
     Preis_für_Teilnahme = DecimalField("Preisgeld", validators=[validators.InputRequired()])
-    Besucher = StringField("Besucher", validators=[validators.InputRequired()])
+    Besucher = DecimalField("Besucher", validators=[validators.InputRequired()])
