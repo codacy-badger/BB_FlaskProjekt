@@ -73,19 +73,18 @@ def submitEditForm():
     else:
         raise ("Fatal Error")
 
-@organisator_blueprint.route("/organisator/editMarathonlaufForm")
+@organisator_blueprint.route("/organisator/editOrganisatorForm")
 def showEditForm():
-    OrganisationID = request.args["MarathonID"]
+    OrganisationID = request.args["OrganisationID"]
 
     Organisator_to_edit = db.session.query(Organisator).filter(Organisator.OrganisationID == OrganisationID).first()
     
     editOrganisatorFormObject = EditOrganisatorForm()
 
-    editOrganisatorFormObject.MarathonID.data = Organisator_to_edit.MarathonID
-    editOrganisatorFormObject.Preisgeld.data = Organisator_to_edit.Preisgeld
-    editOrganisatorFormObject.Kilometer.data = Organisator_to_edit.Kilometer
-    editOrganisatorFormObject.Datum.data = Organisator_to_edit.Datum
-    editOrganisatorFormObject.Preis_für_Teilnahme.data = Organisator_to_edit.Preis_für_Teilnahme
-    editOrganisatorFormObject.Besucher.data = Organisator_to_edit.Besucher
+    editOrganisatorFormObject.OrganisationID.data = Organisator_to_edit.OrganisationID
+    editOrganisatorFormObject.Anschrift.data = Organisator_to_edit.Anschrift
+    editOrganisatorFormObject.Name.data = Organisator_to_edit.Name
+    editOrganisatorFormObject.Sponsoren.data = Organisator_to_edit.Sponsoren
+    editOrganisatorFormObject.Telefonnummer.data = Organisator_to_edit.Telefonnummer
     
-    return render_template("editMarathonlaufForm.html", form = editOrganisatorFormObject)
+    return render_template("editOrganisatorForm.html", form = editOrganisatorFormObject)

@@ -62,6 +62,8 @@
                         <input type="hidden" id="OrganisationID" name="OrganisationID" value="{{item.OrganisationID}}">
                         <button class="btn btn-danger" onclick="deleteOrganisator(this); return false;">❌</button>
                     </form>
+                    <button class="btn btn-info mt-1" 
+                            onclick="window.location.href='/organisator/editOrganisatorForm?OrganisatorID={{item.OrganisationID}}'">✏️</button>
                     </td>
                 </tr>
             {%endfor%}
